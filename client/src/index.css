@@ -1,0 +1,84 @@
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  font-family: "DM Sans", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --cc-bg: #ffffff;
+  --cc-bg-soft: #f7f9fd;
+  --cc-surface: #ffffff;
+  --cc-surface-hover: #f0f4fb;
+  --cc-text: #192b46;
+  --cc-text-muted: #718096;
+  --cc-border: #e5eaf2;
+  --cc-primary: #245ce2;
+  --cc-primary-hover: #194bc5;
+  --cc-nav-bg: rgba(255, 255, 255, 0.94);
+  --cc-hero-start: #f8faff;
+  --cc-hero-end: #e7edff;
+  --cc-shadow: 0 25px 70px rgba(34, 67, 130, 0.1);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --cc-bg: #0b1120;
+  --cc-bg-soft: #101827;
+  --cc-surface: #172235;
+  --cc-surface-hover: #202e44;
+  --cc-text: #edf2ff;
+  --cc-text-muted: #a2b0c6;
+  --cc-border: #2a3950;
+  --cc-primary: #6d95ff;
+  --cc-primary-hover: #8aabff;
+  --cc-nav-bg: rgba(11, 17, 32, 0.94);
+  --cc-hero-start: #0b1120;
+  --cc-hero-end: #142342;
+  --cc-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: "DM Sans", sans-serif;
+  background: var(--cc-bg);
+  color: var(--cc-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Manrope", sans-serif;
+}
+
+::selection {
+  background: var(--cc-primary);
+  color: white;
+}
