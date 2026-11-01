@@ -6,6 +6,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+
 import {
   ShieldCheck,
   ClipboardList,
@@ -25,6 +26,8 @@ import {
 
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import SubmitComplaint from "./pages/SubmitComplaint.jsx";
+import MyComplaints from "./pages/MyComplaints.jsx";
 import "./App.css";
 
 const categories = [
@@ -87,12 +90,10 @@ function Home({ theme, toggleTheme, user, handleLogout }) {
                 type="button"
                 className="btn btn-outline-secondary rounded-pill px-3"
                 onClick={toggleTheme}
-                aria-label={`Switch to ${
-                  theme === "light" ? "dark" : "light"
-                } mode`}
-                title={`Switch to ${
-                  theme === "light" ? "dark" : "light"
-                } mode`}
+                aria-label={`Switch to ${theme === "light" ? "dark" : "light"
+                  } mode`}
+                title={`Switch to ${theme === "light" ? "dark" : "light"
+                  } mode`}
               >
                 {theme === "light" ? (
                   <Moon size={18} />
@@ -104,26 +105,32 @@ function Home({ theme, toggleTheme, user, handleLogout }) {
                   {theme === "light" ? "Dark mode" : "Light mode"}
                 </span>
               </button>
+{user ? (
+  <>
+    <Link
+      className="btn btn-outline-primary rounded-pill px-4"
+      to="/complaints"
+    >
+      My Complaints
+    </Link>
 
-              {user ? (
-                <>
-                  <Link
-                    className="btn btn-outline-primary rounded-pill px-4"
-                    to="/profile"
-                  >
-                    <UserCircle size={18} className="me-2" />
-                    {user.name}
-                  </Link>
+    <Link
+      className="btn btn-outline-primary rounded-pill px-4"
+      to="/profile"
+    >
+      <UserCircle size={18} className="me-2" />
+      {user.name}
+    </Link>
 
-                  <button
-                    type="button"
-                    className="btn btn-primary rounded-pill px-4"
-                    onClick={handleLogout}
-                  >
-                    Log out
-                  </button>
-                </>
-              ) : (
+    <button
+      type="button"
+      className="btn btn-primary rounded-pill px-4"
+      onClick={handleLogout}
+    >
+      Log out
+    </button>
+  </>
+) : (
                 <>
                   <Link
                     className="btn btn-outline-primary rounded-pill px-4"
@@ -168,7 +175,7 @@ function Home({ theme, toggleTheme, user, handleLogout }) {
 
                 <div className="d-flex flex-wrap gap-3 mt-4">
                   <Link
-                    to={user ? "/profile" : "/login"}
+                    to={user ? "/complaints/new" : "/login"}
                     className="btn btn-primary btn-lg rounded-3 px-4"
                   >
                     Report an issue{" "}
@@ -338,7 +345,7 @@ function Home({ theme, toggleTheme, user, handleLogout }) {
               </p>
 
               <Link
-                to={user ? "/profile" : "/register"}
+                to={user ? "/complaints/new" : "/register"}
                 className="btn btn-light btn-lg rounded-3 px-4"
               >
                 Get started{" "}
@@ -418,7 +425,6 @@ function AppContent({ theme, toggleTheme }) {
   const location = useLocation();
   const [user, setUser] = useState(getSavedUser);
 
-  // Refresh the user state when navigating, including after login.
   useEffect(() => {
     setUser(getSavedUser());
   }, [location.pathname]);
@@ -446,6 +452,16 @@ function AppContent({ theme, toggleTheme }) {
       <Route path="/login" element={<Login />} />
 
       <Route path="/register" element={<Register />} />
+
+      <Route
+        path="/complaints/new"
+        element={<SubmitComplaint />}
+      />
+
+      <Route
+        path="/complaints"
+        element={<MyComplaints />}
+      />
 
       <Route
         path="/profile"
