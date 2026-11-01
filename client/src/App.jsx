@@ -28,6 +28,8 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import SubmitComplaint from "./pages/SubmitComplaint.jsx";
 import MyComplaints from "./pages/MyComplaints.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+
 import "./App.css";
 
 const categories = [
@@ -90,10 +92,12 @@ function Home({ theme, toggleTheme, user, handleLogout }) {
                 type="button"
                 className="btn btn-outline-secondary rounded-pill px-3"
                 onClick={toggleTheme}
-                aria-label={`Switch to ${theme === "light" ? "dark" : "light"
-                  } mode`}
-                title={`Switch to ${theme === "light" ? "dark" : "light"
-                  } mode`}
+                aria-label={`Switch to ${
+                  theme === "light" ? "dark" : "light"
+                } mode`}
+                title={`Switch to ${
+                  theme === "light" ? "dark" : "light"
+                } mode`}
               >
                 {theme === "light" ? (
                   <Moon size={18} />
@@ -105,32 +109,43 @@ function Home({ theme, toggleTheme, user, handleLogout }) {
                   {theme === "light" ? "Dark mode" : "Light mode"}
                 </span>
               </button>
-{user ? (
-  <>
-    <Link
-      className="btn btn-outline-primary rounded-pill px-4"
-      to="/complaints"
-    >
-      My Complaints
-    </Link>
 
-    <Link
-      className="btn btn-outline-primary rounded-pill px-4"
-      to="/profile"
-    >
-      <UserCircle size={18} className="me-2" />
-      {user.name}
-    </Link>
+              {user ? (
+                <>
+                  <Link
+                    className="btn btn-outline-primary rounded-pill px-4"
+                    to="/complaints"
+                  >
+                    My Complaints
+                  </Link>
 
-    <button
-      type="button"
-      className="btn btn-primary rounded-pill px-4"
-      onClick={handleLogout}
-    >
-      Log out
-    </button>
-  </>
-) : (
+                  {user.role === "admin" && (
+                    <Link
+                      className="btn btn-outline-primary rounded-pill px-4"
+                      to="/admin"
+                    >
+                      <ShieldCheck size={18} className="me-2" />
+                      Admin Dashboard
+                    </Link>
+                  )}
+
+                  <Link
+                    className="btn btn-outline-primary rounded-pill px-4"
+                    to="/profile"
+                  >
+                    <UserCircle size={18} className="me-2" />
+                    {user.name}
+                  </Link>
+
+                  <button
+                    type="button"
+                    className="btn btn-primary rounded-pill px-4"
+                    onClick={handleLogout}
+                  >
+                    Log out
+                  </button>
+                </>
+              ) : (
                 <>
                   <Link
                     className="btn btn-outline-primary rounded-pill px-4"
@@ -379,6 +394,7 @@ function Profile({ user }) {
         >
           <div className="d-flex align-items-center gap-3 mb-4">
             <UserCircle size={40} />
+
             <div>
               <h1 className="h3 fw-bold mb-1">My Profile</h1>
               <p className="text-secondary mb-0">
@@ -466,6 +482,11 @@ function AppContent({ theme, toggleTheme }) {
       <Route
         path="/profile"
         element={<Profile user={user} />}
+      />
+
+      <Route
+        path="/admin"
+        element={<AdminDashboard />}
       />
 
       <Route
