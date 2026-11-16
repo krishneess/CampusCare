@@ -46,7 +46,7 @@ function Register() {
     setSuccess("");
 
     const { name, email, password, confirmPassword } = formData;
-
+    //validations
     if (!name.trim() || !email.trim() || !password || !confirmPassword) {
       setError("Please fill in all fields.");
       return;
