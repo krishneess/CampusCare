@@ -52,7 +52,7 @@ function Login() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "http://https://campuscare-api.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: {

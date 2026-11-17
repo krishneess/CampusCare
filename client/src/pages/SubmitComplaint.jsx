@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api/complaints";
+const API_URL = "http://https://campuscare-api.vercel.app/api/complaints";
 
 function SubmitComplaint() {
   const navigate = useNavigate();
