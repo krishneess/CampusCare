@@ -210,4 +210,38 @@ router.patch(
   }
 );
 
+// DELETE: Remove a complaint record (User or Admin)
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    const complaint = await Complaint.findById(req.params.id);
+
+    if (!complaint) {
+      return res.status(404).json({
+        message: "Complaint not found.",
+      });
+    }
+
+    if (
+      complaint.submittedBy.toString() !== req.user.userId &&
+      req.user.role !== "admin"
+    ) {
+      return res.status(403).json({
+        message: "Access denied. You can only delete your own complaints.",
+      });
+    }
+
+    await Complaint.findByIdAndDelete(req.params.id);
+
+    return res.status(200).json({
+      message: "Complaint record deleted successfully.",
+    });
+  } catch (error) {
+    console.error("Delete complaint error:", error);
+
+    return res.status(500).json({
+      message: "Failed to delete complaint.",
+    });
+  }
+});
+
 module.exports = router;
