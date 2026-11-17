@@ -42,7 +42,7 @@ function Login() {
       return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
       setError("Please enter a valid email address.");
       return;
     }
@@ -52,7 +52,7 @@ function Login() {
       setError("");
 
       const response = await fetch(
-        "http://https://campuscare-api.vercel.app/api/auth/login",
+        "https://campuscare-api.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: {
@@ -77,22 +77,22 @@ function Login() {
         return;
       }
 
-      // Save the token for this browser session.
+      // Save authentication token.
       sessionStorage.setItem("campuscare_token", data.token);
 
-      // Save basic user information for later use.
+      // Save user information.
       sessionStorage.setItem(
         "campuscare_user",
         JSON.stringify(data.user)
       );
 
-      // Redirect only after successful backend authentication.
+      // Redirect after successful login.
       navigate("/");
     } catch (error) {
       console.error("Login request failed:", error);
 
       setError(
-        "Unable to reach CampusCare server. Make sure the backend is running."
+        "Unable to reach CampusCare server. Please try again later."
       );
     } finally {
       setLoading(false);
@@ -123,7 +123,9 @@ function Login() {
             </div>
 
             <p className="auth-eyebrow">WELCOME BACK</p>
+
             <h1>Sign in to CampusCare</h1>
+
             <p>
               Log in to report campus issues and track their progress.
             </p>
@@ -135,6 +137,7 @@ function Login() {
 
               <div className="auth-input-wrap">
                 <Mail size={19} />
+
                 <input
                   id="email"
                   name="email"
@@ -152,6 +155,7 @@ function Login() {
 
               <div className="auth-input-wrap">
                 <LockKeyhole size={19} />
+
                 <input
                   id="password"
                   name="password"
