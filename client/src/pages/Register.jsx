@@ -71,7 +71,7 @@ function Register() {
       setLoading(true);
 
       const response = await fetch(
-        "http://https://campuscare-api.vercel.app/api/auth/register",
+        "https://campuscare-api.vercel.app/api/auth/register",
         {
           method: "POST",
           headers: {

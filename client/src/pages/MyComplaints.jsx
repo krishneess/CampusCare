@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const API_URL = "http://https://campuscare-api.vercel.app/api/complaints/my";
+const API_URL = "https://campuscare-api.vercel.app/api/complaints/my";
 
 function MyComplaints() {
   const [complaints, setComplaints] = useState([]);

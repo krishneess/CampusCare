@@ -1,4 +1,8 @@
 
+const dns = require("node:dns");
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+
 require("dotenv").config();
 
 const express = require("express");
@@ -29,6 +33,9 @@ async function connectDB() {
   if (!connectionPromise) {
     connectionPromise = mongoose
       .connect(process.env.MONGODB_URI)
+      .then(() => {
+        console.log("MongoDB Atlas connected successfully!");
+      })
       .catch((error) => {
         connectionPromise = null;
         throw error;
@@ -45,6 +52,7 @@ app.use("/api", async (req, res, next) => {
     next();
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);
+
     res.status(500).json({
       message: "Database connection failed",
     });

@@ -9,7 +9,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 
-const API = "http://https://campuscare-api.vercel.app/api/complaints";
+const API = "https://campuscare-api.vercel.app/api/complaints";
 
 const statuses = ["Submitted", "In Progress", "Resolved", "Rejected"];
 

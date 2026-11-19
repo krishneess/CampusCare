@@ -62,7 +62,7 @@ Created `server/server.js` with the following features:
 - Created a GET `/` endpoint returning a JSON message.
 - Started the server using `app.listen()`.
 
-The backend was tested successfully at `http://localhost:5000/`.
+The backend was tested successfully at `http://https://campuscare-api.vercel.app/`.
 
 **Note:** The API currently contains only a basic test endpoint. Authentication, complaint APIs and database connectivity are pending.
 
@@ -140,7 +140,7 @@ URL: `http://localhost:5173/`
 npm run dev
 ```
 
-URL: `http://localhost:5000/`
+URL: `http://https://campuscare-api.vercel.app/`
 
 ## 10. Development Approach
 
